@@ -21,7 +21,7 @@ android {
             useSupportLibrary true
         }
         buildConfigField("String", "GITHUB_ACCESS_TOKEN_KEY", GITHUB_ACCESS_TOKEN)
-        buildConfigField("String", "GITHUB_BASE_URL", "\"https://www.api.github.com/\"") // this can be conditionalized for different environment through Jenkins
+        buildConfigField("String", "GITHUB_BASE_URL", "\"https://api.github.com/\"") // this can be conditionalized for different environment through Jenkins
     }
 
     buildTypes {

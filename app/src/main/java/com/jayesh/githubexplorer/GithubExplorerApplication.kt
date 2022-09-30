@@ -12,6 +12,6 @@ class GithubExplorerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        commonRequestParams.init(token = BuildConfig.GITHUB_ACCESS_TOKEN_KEY)
+        commonRequestParams.init(token = BuildConfig.GITHUB_ACCESS_TOKEN_KEY) // ideally this token will come post authentication but hardcoding for time and requirements being
     }
 }
