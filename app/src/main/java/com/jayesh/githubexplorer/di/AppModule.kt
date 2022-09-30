@@ -1,4 +1,4 @@
-package com.jayesh.githubexplorer
+package com.jayesh.githubexplorer.di
 
 import com.jayesh.commons.request.params.CommonRequestParams
 import com.jayesh.commons.request.params.CommonRequestParamsImpl
@@ -8,9 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module
 @InstallIn(SingletonComponent::class)
-interface ApplicationModule {
+@Module
+interface AppModule {
 
     @Binds
     @Singleton
