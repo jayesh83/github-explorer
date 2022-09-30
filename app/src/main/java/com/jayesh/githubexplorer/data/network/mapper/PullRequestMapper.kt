@@ -3,6 +3,7 @@ package com.jayesh.githubexplorer.data.network.mapper
 import com.jayesh.githubexplorer.data.model.PullRequest
 import com.jayesh.githubexplorer.data.network.model.PullRequestParser
 import com.jayesh.githubexplorer.utils.data.Mapper
+import com.jayesh.githubexplorer.utils.formatGithubDate
 import javax.inject.Inject
 
 interface PullRequestMapper : Mapper<PullRequestParser, PullRequest>
@@ -14,8 +15,8 @@ class PullRequestMapperImpl @Inject constructor(): PullRequestMapper {
             PullRequest(
                 id = id ?: -1L,
                 title = title ?: "",
-                createdAt = createdAt ?: "",
-                closedAt = closedAt ?: "",
+                createdAt = formatGithubDate(createdAt),
+                closedAt = formatGithubDate(closedAt),
                 state = mapPullRequestState(state),
                 user = mapPullRequestUser(user),
                 isDraft = isDraft ?: false,
