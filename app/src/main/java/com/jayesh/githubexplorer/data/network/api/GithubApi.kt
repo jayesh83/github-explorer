@@ -12,6 +12,7 @@ interface GithubApi {
         @HeaderMap headers: HashMap<String, Any>,
         @Query("state") prState: String = "closed",
         @Query("sort") sort: String = "created",
+        @Query("direction") sortDirection: String = "desc",
         @Query("per_page") itemCountPerPage: Int = 30,
         @Query("page") pageNumber: Int = 1
     ): Response<List<PullRequestParser>>

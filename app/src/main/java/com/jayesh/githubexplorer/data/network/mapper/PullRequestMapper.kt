@@ -15,7 +15,7 @@ class PullRequestMapperImpl @Inject constructor(): PullRequestMapper {
             PullRequest(
                 id = id ?: -1L,
                 title = title ?: "",
-                createdAt = formatGithubDate(createdAt),
+                createdAt = formatGithubDate(createdAt),  // FIXME: somehow the dates are not correct
                 closedAt = formatGithubDate(closedAt),
                 state = mapPullRequestState(state),
                 user = mapPullRequestUser(user),
