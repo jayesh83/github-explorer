@@ -1,13 +1,17 @@
 package com.jayesh.githubexplorer.ui
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
@@ -20,13 +24,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.jayesh.githubexplorer.R
 import com.jayesh.githubexplorer.data.model.PullRequest
+import com.jayesh.githubexplorer.utils.data.Result
 import com.jayesh.githubexplorer.utils.data.ResultRenderer
 
 @Composable
@@ -44,7 +53,7 @@ fun PullRequestScreen(viewModel: GithubViewModel) {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(modifier = Modifier.size(56.dp))
             }
         },
         onError = {
@@ -75,18 +84,19 @@ fun PullRequestList(prs: List<PullRequest>) {
 
 @Composable
 fun PullRequestItem(pr: PullRequest) {
-    Surface(shape = MaterialTheme.shapes.large) {
+    Surface(
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.clickable(onClick = {})
+    ) {
         Column {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
+                modifier = Modifier.padding(top = 8.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_merge),
                     contentDescription = "merge_icon",
                     tint = colorResource(R.color.purple_500),
-                    modifier = Modifier.padding(horizontal = 8.dp)
+                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
                 )
                 Column(
                     modifier = Modifier
@@ -102,7 +112,19 @@ fun PullRequestItem(pr: PullRequest) {
                     Text(
                         text = pr.user.name,
                         style = MaterialTheme.typography.caption,
-                        modifier = Modifier.alpha(0.7f)
+                        modifier = Modifier.alpha(0.8f)
+                    )
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(pr.user.avatarUrl)
+                            .crossfade(true)
+                            .placeholder(R.drawable.image_placeholder)
+                            .build(),
+                        contentDescription = "user image",
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                            .clip(CircleShape)
+                            .size(20.dp)
                     )
                 }
                 Text(
