@@ -4,4 +4,5 @@
     <string name="retry">Retry</string>
     <string name="no_network_message">Please connect to network and try again!</string>
     <string name="no_pr_message">There are not any pull requests</string>
+    <string name="pull_requests">Pull Requests</string>
 </resources>

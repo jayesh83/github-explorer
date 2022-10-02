@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -65,11 +66,16 @@ fun PullRequestList(pullRequests: LazyPagingItems<PullRequest>) {
     }
 
     LazyColumn {
+        item {
+            PullRequestHeader()
+        }
+
         items(lazyPagingItems = pullRequests) { pr ->
             if (pr != null) {
                 PullRequestItem(pr)
             }
         }
+
         when (val appendLoadState = pullRequests.loadState.append) {
             is LoadState.Loading -> loadingItem()
             is LoadState.Error -> errorItem(
@@ -116,7 +122,6 @@ private fun NoPullRequestsMessage() {
 @Composable
 private fun PullRequestItem(pr: PullRequest) {
     Surface(
-        shape = MaterialTheme.shapes.large,
         modifier = Modifier.clickable(onClick = {})
     ) {
         Column {
@@ -180,6 +185,23 @@ private fun PullRequestItem(pr: PullRequest) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun PullRequestHeader() {
+    Surface {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = 56.dp)
+                .padding(start = 20.dp, top = 16.dp, bottom = 16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.pull_requests),
+                style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.SemiBold)
             )
         }
     }
