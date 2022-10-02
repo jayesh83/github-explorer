@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GithubExplorer</string>
+    <string name="i_am_unused_string">I am unused string, Yes</string>
 </resources>
