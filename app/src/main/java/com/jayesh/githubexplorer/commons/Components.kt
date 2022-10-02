@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jayesh.githubexplorer.R
 import java.io.IOException
@@ -44,7 +45,7 @@ fun ErrorFullScreen(error: Throwable, onRetry: () -> Unit) {
         ) {
             Text(
                 text = stringResource(if (isNetworkIssue) R.string.no_network_message else R.string.something_went_wrong),
-                style = MaterialTheme.typography.subtitle1
+                style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.SemiBold)
             )
             Button(onClick = onRetry, modifier = Modifier.defaultMinSize(128.dp)) {
                 Text(
@@ -86,7 +87,7 @@ fun LazyListScope.errorItem(error: Throwable, onRetry: () -> Unit) {
             ) {
                 Text(
                     text = stringResource(if (isNetworkIssue) R.string.no_network_message else R.string.something_went_wrong),
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.SemiBold)
                 )
                 Button(onClick = onRetry) {
                     Text(
