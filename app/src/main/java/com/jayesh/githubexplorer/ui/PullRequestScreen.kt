@@ -123,7 +123,7 @@ private fun PullRequestItem(pr: PullRequest) {
                 modifier = Modifier.padding(top = 8.dp)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_merge),
+                    painter = painterResource(if (pr.isMerged) R.drawable.ic_merge else R.drawable.ic_pr_closed),
                     contentDescription = "merge_icon",
                     tint = colorResource(R.color.purple_500),
                     modifier = Modifier.padding(start = 16.dp, end = 8.dp)
