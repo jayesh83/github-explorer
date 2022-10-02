@@ -1,6 +1,7 @@
 # github-explorer
-Lists all closed pull requests (as of now)
-Note: main-trunc has all the final changes
+### Lists all closed pull requests
+
+Note: main-trunc branch has all the final changes
 
 - Listed own code pull requests
 - Pagination Video
