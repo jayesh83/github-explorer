@@ -6,32 +6,22 @@ import java.util.Date
 import java.util.Locale
 
 private const val readableTimePattern = "h:mm a"
-private const val readableDatePattern = "dd/mm/yyyy"
-private const val githubDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+private const val readableDatePattern = "dd/MM/yyyy"
 
 /* example github date: 2022-10-30T19:01:12Z is in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ */
-fun formatGithubDate(date: String?): String {
+fun formatGithubDate(date: Date?): String {
     if (date == null) {
         return ""
     }
 
-    val parsedDate: Date? = SimpleDateFormat(githubDatePattern, Locale.getDefault()).parse(date)
-
     return when {
-        parsedDate == null -> extractedGithubDate(date)
+        DateUtils.isToday(date.time) -> SimpleDateFormat(readableTimePattern, Locale.getDefault()).format(date).lowercase()
 
-        DateUtils.isToday(parsedDate.time) -> SimpleDateFormat(readableTimePattern, Locale.getDefault()).format(parsedDate).lowercase()
-
-        DateUtils.isToday(parsedDate.time + DateUtils.DAY_IN_MILLIS) -> "Yesterday " + SimpleDateFormat(
+        DateUtils.isToday(date.time + DateUtils.DAY_IN_MILLIS) -> "Yesterday " + SimpleDateFormat(
             readableTimePattern,
             Locale.getDefault()
-        ).format(parsedDate).lowercase()
+        ).format(date).lowercase()
 
-        else -> SimpleDateFormat(readableDatePattern, Locale.getDefault()).format(parsedDate)
+        else -> SimpleDateFormat(readableDatePattern, Locale.getDefault()).format(date)
     }
-}
-
-private fun extractedGithubDate(date: String): String {
-    val (year, month, day) = date.substringBefore('T').split('-')
-    return "$day/$month/$year"
 }
