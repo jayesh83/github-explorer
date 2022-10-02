@@ -13,9 +13,11 @@ class GithubNetworkSourceImpl @Inject constructor(
     private val pullRequestMapper: PullRequestMapper
 ) : GithubNetworkSource {
 
-    override suspend fun getPullRequests(): List<PullRequest> {
+    override suspend fun getPullRequests(page: Int, pageSize: Int): List<PullRequest> {
         val response = githubApi.getPullRequests(
-            headers = commonRequestParams.getHeaderMap()
+            headers = commonRequestParams.getHeaderMap(),
+            pageNumber = page,
+            itemCountPerPage = pageSize
         )
         if (response.isSuccessful) {
             response.body()?.let { pullRequests ->

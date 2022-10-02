@@ -2,6 +2,7 @@ package com.jayesh.githubexplorer.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.jayesh.githubexplorer.data.GithubRepository
 import com.jayesh.githubexplorer.data.model.PullRequest
 import com.jayesh.githubexplorer.utils.data.Result
@@ -16,7 +17,9 @@ class GithubViewModel @Inject constructor(
     private val githubRepository: GithubRepository
 ) : ViewModel() {
     private val _pullRequests: MutableStateFlow<Result<List<PullRequest>>> = MutableStateFlow(Result.Loading)
-    val pullRequestsFlow = _pullRequests.asStateFlow()
+    val pullRequests = _pullRequests.asStateFlow()
+
+    val pullRequestPages = githubRepository.getPullRequestPages().cachedIn(viewModelScope)
 
     fun getPullRequests() {
         _pullRequests.value = Result.Loading
