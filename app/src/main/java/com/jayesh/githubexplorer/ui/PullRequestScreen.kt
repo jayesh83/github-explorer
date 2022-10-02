@@ -1,6 +1,9 @@
 package com.jayesh.githubexplorer.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,6 +25,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -51,6 +57,14 @@ fun PullRequestScreen(viewModel: GithubViewModel) {
 
 @Composable
 fun PullRequestList(pullRequests: LazyPagingItems<PullRequest>) {
+    val noPullRequests by remember {
+        derivedStateOf {
+            with(pullRequests) {
+                loadState.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && itemCount == 0
+            }
+        }
+    }
+
     LazyColumn {
         items(lazyPagingItems = pullRequests) { pr ->
             if (pr != null) {
@@ -76,6 +90,14 @@ fun PullRequestList(pullRequests: LazyPagingItems<PullRequest>) {
             )
             else -> Unit
         }
+    }
+
+    AnimatedVisibility(
+        visible = noPullRequests,
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
+        NoPullRequestsMessage()
     }
 }
 
@@ -111,6 +133,19 @@ fun ErrorFullScreen(error: Throwable, onRetry: () -> Unit) {
                 )
             }
         }
+    }
+}
+
+@Composable
+fun NoPullRequestsMessage() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.no_pr_message),
+            style = MaterialTheme.typography.h6
+        )
     }
 }
 

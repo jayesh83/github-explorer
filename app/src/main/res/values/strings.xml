@@ -3,4 +3,5 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="retry">Retry</string>
     <string name="no_network_message">Please connect to network and try again!</string>
+    <string name="no_pr_message">There are not any pull requests</string>
 </resources>
