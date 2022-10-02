@@ -1,6 +1,7 @@
 package com.jayesh.githubexplorer.data.network.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class PullRequestParser(
     @SerializedName("id")
@@ -10,10 +11,10 @@ data class PullRequestParser(
     val title: String?,
 
     @SerializedName("created_at")
-    val createdAt: String?,
+    val createdAt: Date?,
 
     @SerializedName("closed_at")
-    val closedAt: String?,
+    val closedAt: Date?,
 
     @SerializedName("merged_at")
     val mergedAt: String?,
