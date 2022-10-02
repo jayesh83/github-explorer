@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -122,12 +123,21 @@ private fun PullRequestItem(pr: PullRequest) {
             Row(
                 modifier = Modifier.padding(top = 8.dp)
             ) {
-                Icon(
-                    painter = painterResource(if (pr.isMerged) R.drawable.ic_merge else R.drawable.ic_pr_closed),
-                    contentDescription = "merge_icon",
-                    tint = colorResource(R.color.purple_500),
-                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
-                )
+                if (pr.isMerged) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_merge),
+                        contentDescription = "merge_icon",
+                        tint = colorResource(R.color.purple_500),
+                        modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+                    )
+                } else {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_pr_closed),
+                        contentDescription = "merge_icon",
+                        tint = Color.Red,
+                        modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+                    )
+                }
                 Column(
                     modifier = Modifier
                         .weight(1f)
