@@ -6,7 +6,7 @@
 Note: main-trunc branch has all the final changes
 
 
-**Download the apk** : https://drive.google.com/file/d/1BlywhU0W8EHCwLV0tdnYDug7t0tl1I9G/view?usp=sharing
+**Download the apk** : https://drive.google.com/file/d/1UAuKGRGlYCeAtN5oJj6jvthCJnahyTVA/view?usp=sharing
 
 
 - Listed own code pull requests
