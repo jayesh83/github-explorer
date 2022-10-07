@@ -14,7 +14,7 @@ Note: main-trunc branch has all the final changes
 - Paginated item load error
 - No pull requests
 - Network error
-- Generic error 
+- Generic error (comes when api fails ex. access token expires or some other failure)
 
 <img src=https://user-images.githubusercontent.com/40509714/193457823-acfd8848-c024-4bef-9cae-e91ebb5d9bad.jpg width=250>
 
